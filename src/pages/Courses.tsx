@@ -212,6 +212,189 @@ const Courses = () => {
           ))}
         </div>
 
+        {/* Jammu & Kashmir Colleges Section */}
+        <div className="mt-16 animate-slide-up">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-foreground mb-4">
+              Top Colleges in <span className="bg-gradient-hero bg-clip-text text-transparent">Jammu & Kashmir</span>
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+              Discover premier educational institutions in the beautiful valley of Kashmir and Jammu region
+            </p>
+          </div>
+
+          {/* Engineering Colleges */}
+          <div className="mb-12">
+            <h3 className="text-2xl font-semibold text-foreground mb-6 flex items-center gap-2">
+              🔧 Engineering Colleges
+            </h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                {
+                  name: "National Institute of Technology (NIT) Srinagar",
+                  location: "Srinagar, Kashmir",
+                  website: "https://www.nitsri.ac.in"
+                },
+                {
+                  name: "Islamic University of Science & Technology (IUST)",
+                  location: "Awantipora, Kashmir",
+                  website: "https://www.islamicuniversity.edu.in"
+                },
+                {
+                  name: "Government College of Engineering & Technology",
+                  location: "Jammu",
+                  website: "https://gcetjammu.ac.in"
+                },
+                {
+                  name: "Shri Mata Vaishno Devi University",
+                  location: "Katra, Jammu",
+                  website: "https://www.smvdu.ac.in"
+                },
+                {
+                  name: "SSM College of Engineering & Technology",
+                  location: "Baramulla, Kashmir",
+                  website: "https://www.ssmcet.org"
+                },
+                {
+                  name: "Baba Ghulam Shah Badshah University",
+                  location: "Rajouri, Jammu",
+                  website: "https://www.bgsbu.ac.in"
+                }
+              ].map((college, index) => (
+                <Card key={college.name} className="card-learning animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                  <CardHeader>
+                    <CardTitle className="text-lg text-foreground">{college.name}</CardTitle>
+                    <CardDescription className="text-muted-foreground">{college.location}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Button 
+                      className="w-full" 
+                      variant="outline"
+                      onClick={() => window.open(college.website, '_blank')}
+                    >
+                      Visit Website
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          {/* Medical Colleges */}
+          <div className="mb-12">
+            <h3 className="text-2xl font-semibold text-foreground mb-6 flex items-center gap-2">
+              🏥 Medical Colleges
+            </h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                {
+                  name: "Government Medical College Srinagar",
+                  location: "Srinagar, Kashmir",
+                  website: "https://www.gmcsrinagar.edu.in"
+                },
+                {
+                  name: "Government Medical College Jammu",
+                  location: "Jammu",
+                  website: "https://www.gmcjammu.nic.in"
+                },
+                {
+                  name: "Sher-i-Kashmir Institute of Medical Sciences (SKIMS)",
+                  location: "Srinagar, Kashmir",
+                  website: "https://www.skims.ac.in"
+                },
+                {
+                  name: "Government Medical College Baramulla",
+                  location: "Baramulla, Kashmir",
+                  website: "https://www.gmcbaramulla.edu.in"
+                },
+                {
+                  name: "Government Medical College Kathua",
+                  location: "Kathua, Jammu",
+                  website: "https://www.gmckathua.ac.in"
+                },
+                {
+                  name: "Government Medical College Doda",
+                  location: "Doda, Jammu",
+                  website: "https://www.gmcdoda.ac.in"
+                }
+              ].map((college, index) => (
+                <Card key={college.name} className="card-learning animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                  <CardHeader>
+                    <CardTitle className="text-lg text-foreground">{college.name}</CardTitle>
+                    <CardDescription className="text-muted-foreground">{college.location}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Button 
+                      className="w-full" 
+                      variant="outline"
+                      onClick={() => window.open(college.website, '_blank')}
+                    >
+                      Visit Website
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          {/* Arts & Sciences Colleges */}
+          <div className="mb-12">
+            <h3 className="text-2xl font-semibold text-foreground mb-6 flex items-center gap-2">
+              🎨 Arts & Sciences Colleges
+            </h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                {
+                  name: "University of Kashmir",
+                  location: "Srinagar, Kashmir",
+                  website: "https://www.kashmiruniversity.ac.in"
+                },
+                {
+                  name: "University of Jammu",
+                  location: "Jammu",
+                  website: "https://www.jammuuniversity.ac.in"
+                },
+                {
+                  name: "Central University of Kashmir",
+                  location: "Ganderbal, Kashmir",
+                  website: "https://www.cukashmir.ac.in"
+                },
+                {
+                  name: "Government Degree College Srinagar",
+                  location: "Srinagar, Kashmir",
+                  website: "https://www.gdcsrinagar.edu.in"
+                },
+                {
+                  name: "Government College for Women Srinagar",
+                  location: "Srinagar, Kashmir",
+                  website: "https://www.gcwsrinagar.edu.in"
+                },
+                {
+                  name: "Cluster University Jammu",
+                  location: "Jammu",
+                  website: "https://www.cujammu.ac.in"
+                }
+              ].map((college, index) => (
+                <Card key={college.name} className="card-learning animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                  <CardHeader>
+                    <CardTitle className="text-lg text-foreground">{college.name}</CardTitle>
+                    <CardDescription className="text-muted-foreground">{college.location}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Button 
+                      className="w-full" 
+                      variant="outline"
+                      onClick={() => window.open(college.website, '_blank')}
+                    >
+                      Visit Website
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+
         {/* Call to Action */}
         <div className="mt-16 text-center animate-fade-in">
           <Card className="card-learning max-w-2xl mx-auto">
