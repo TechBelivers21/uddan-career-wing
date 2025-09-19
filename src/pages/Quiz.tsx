@@ -12,55 +12,105 @@ const Quiz = () => {
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [isCompleted, setIsCompleted] = useState(false);
 
-  const questions = [
+const questions = [
     {
       id: 1,
-      question: "Which subject do you find most interesting?",
+      question: "What subject interests you the most?",
       options: [
-        { value: "science", label: "Science & Technology" },
-        { value: "arts", label: "Arts & Literature" },
-        { value: "commerce", label: "Commerce & Business" },
-        { value: "social", label: "Social Sciences" },
+        { value: "science", label: "Science and Mathematics" },
+        { value: "arts", label: "Arts and Literature" },
+        { value: "commerce", label: "Commerce and Business" },
+        { value: "technology", label: "Technology and Engineering" },
       ]
     },
     {
       id: 2,
-      question: "What type of work environment do you prefer?",
+      question: "Which activity do you enjoy most in your free time?",
       options: [
-        { value: "team", label: "Collaborative team environment" },
-        { value: "independent", label: "Independent work" },
-        { value: "creative", label: "Creative and flexible" },
-        { value: "structured", label: "Structured and organized" },
+        { value: "reading", label: "Reading books and articles" },
+        { value: "creating", label: "Creating art or writing" },
+        { value: "solving", label: "Solving puzzles and problems" },
+        { value: "socializing", label: "Meeting people and socializing" },
       ]
     },
     {
       id: 3,
-      question: "Which activity excites you the most?",
+      question: "What type of projects excite you?",
       options: [
-        { value: "problem", label: "Solving complex problems" },
-        { value: "create", label: "Creating something new" },
-        { value: "help", label: "Helping others" },
-        { value: "analyze", label: "Analyzing data and trends" },
+        { value: "research", label: "Research and analysis projects" },
+        { value: "creative", label: "Creative and design projects" },
+        { value: "technical", label: "Technical and coding projects" },
+        { value: "business", label: "Business and strategy projects" },
       ]
     },
     {
       id: 4,
-      question: "What motivates you the most in your career?",
+      question: "Which work environment suits you best?",
       options: [
-        { value: "impact", label: "Making a positive impact" },
-        { value: "growth", label: "Continuous learning and growth" },
-        { value: "stability", label: "Job security and stability" },
-        { value: "innovation", label: "Innovation and creativity" },
+        { value: "team", label: "Collaborative team environment" },
+        { value: "independent", label: "Independent and quiet workspace" },
+        { value: "dynamic", label: "Dynamic and fast-paced" },
+        { value: "structured", label: "Structured and organized" },
       ]
     },
     {
       id: 5,
-      question: "Which skill would you like to develop further?",
+      question: "What motivates you most in a career?",
       options: [
-        { value: "technical", label: "Technical and analytical skills" },
+        { value: "helping", label: "Helping others and making impact" },
+        { value: "innovation", label: "Innovation and creativity" },
+        { value: "stability", label: "Job security and stability" },
+        { value: "growth", label: "Continuous learning and growth" },
+      ]
+    },
+    {
+      id: 6,
+      question: "Which skills do you want to develop?",
+      options: [
+        { value: "analytical", label: "Analytical and logical thinking" },
         { value: "communication", label: "Communication and leadership" },
-        { value: "creative", label: "Creative and artistic abilities" },
-        { value: "business", label: "Business and entrepreneurship" },
+        { value: "technical", label: "Technical and programming skills" },
+        { value: "artistic", label: "Artistic and creative abilities" },
+      ]
+    },
+    {
+      id: 7,
+      question: "What type of challenges excite you?",
+      options: [
+        { value: "complex", label: "Complex problem-solving" },
+        { value: "people", label: "Working with diverse people" },
+        { value: "creative", label: "Creative and artistic challenges" },
+        { value: "strategic", label: "Strategic planning and execution" },
+      ]
+    },
+    {
+      id: 8,
+      question: "Which subjects did you excel in during school?",
+      options: [
+        { value: "stem", label: "Science, Technology, Engineering, Math" },
+        { value: "languages", label: "Languages and Literature" },
+        { value: "social", label: "Social Studies and History" },
+        { value: "arts", label: "Arts and Creative subjects" },
+      ]
+    },
+    {
+      id: 9,
+      question: "What kind of impact do you want to make?",
+      options: [
+        { value: "technological", label: "Technological advancement" },
+        { value: "social", label: "Social and community improvement" },
+        { value: "economic", label: "Economic and business growth" },
+        { value: "cultural", label: "Cultural and artistic contribution" },
+      ]
+    },
+    {
+      id: 10,
+      question: "Which career aspect is most important to you?",
+      options: [
+        { value: "salary", label: "High salary and financial rewards" },
+        { value: "passion", label: "Following your passion" },
+        { value: "worklife", label: "Work-life balance" },
+        { value: "prestige", label: "Social recognition and prestige" },
       ]
     },
   ];
@@ -90,32 +140,69 @@ const Quiz = () => {
   };
 
   const getResults = () => {
-    // Simple logic to suggest career paths based on answers
     const answerValues = Object.values(answers);
+    const answerCounts: Record<string, number> = {};
     
-    if (answerValues.includes("science") || answerValues.includes("technical")) {
+    // Count occurrences of each answer type
+    answerValues.forEach(answer => {
+      answerCounts[answer] = (answerCounts[answer] || 0) + 1;
+    });
+    
+    // Determine dominant interests
+    const hasScience = answerValues.includes("science") || answerValues.includes("stem") || answerValues.includes("technical") || answerValues.includes("solving") || answerValues.includes("analytical");
+    const hasArts = answerValues.includes("arts") || answerValues.includes("creative") || answerValues.includes("creating") || answerValues.includes("artistic") || answerValues.includes("cultural");
+    const hasBusiness = answerValues.includes("commerce") || answerValues.includes("business") || answerValues.includes("strategic") || answerValues.includes("economic");
+    const hasTechnology = answerValues.includes("technology") || answerValues.includes("technical") || answerValues.includes("technological");
+    const hasSocial = answerValues.includes("helping") || answerValues.includes("people") || answerValues.includes("social") || answerValues.includes("socializing");
+    
+    if (hasTechnology || (hasScience && answerValues.includes("technical"))) {
       return {
-        title: "STEM Fields",
-        careers: ["Software Engineering", "Data Science", "Biotechnology", "Mechanical Engineering"],
-        description: "Your analytical mind and interest in technology make you perfect for STEM careers!"
+        title: "Technology & Engineering",
+        careers: ["Software Engineer", "Data Scientist", "AI/ML Engineer", "Cybersecurity Analyst", "Product Manager"],
+        courses: ["Computer Science", "Information Technology", "Electronics Engineering", "Data Science"],
+        description: "Your logical thinking and interest in technology make you perfect for the tech industry!",
+        color: "blue"
       };
-    } else if (answerValues.includes("arts") || answerValues.includes("creative")) {
+    } else if (hasScience) {
       return {
-        title: "Creative Arts",
-        careers: ["Graphic Design", "Content Writing", "Digital Marketing", "Film Production"],
-        description: "Your creative flair and artistic vision open doors to exciting creative careers!"
+        title: "Science & Research",
+        careers: ["Research Scientist", "Biotechnologist", "Environmental Scientist", "Medical Researcher", "Lab Technician"],
+        courses: ["Physics", "Chemistry", "Biology", "Biotechnology", "Environmental Science"],
+        description: "Your analytical mind and scientific curiosity open doors to research and innovation!",
+        color: "green"
       };
-    } else if (answerValues.includes("commerce") || answerValues.includes("business")) {
+    } else if (hasArts) {
       return {
-        title: "Business & Commerce",
-        careers: ["Business Management", "Finance", "Marketing", "Entrepreneurship"],
-        description: "Your business acumen and leadership qualities are perfect for commerce fields!"
+        title: "Creative Arts & Design",
+        careers: ["Graphic Designer", "Content Creator", "Film Director", "Marketing Creative", "Art Therapist"],
+        courses: ["Fine Arts", "Graphic Design", "Mass Communication", "Film Studies", "Creative Writing"],
+        description: "Your creative vision and artistic talents can flourish in the creative industries!",
+        color: "purple"
+      };
+    } else if (hasBusiness) {
+      return {
+        title: "Business & Management",
+        careers: ["Business Analyst", "Marketing Manager", "Entrepreneur", "Financial Advisor", "Operations Manager"],
+        courses: ["Business Administration", "Commerce", "Economics", "Marketing", "Finance"],
+        description: "Your strategic thinking and business acumen are perfect for leadership roles!",
+        color: "orange"
+      };
+    } else if (hasSocial) {
+      return {
+        title: "Social Sciences & Humanities",
+        careers: ["Psychologist", "Social Worker", "Teacher", "HR Manager", "Counselor"],
+        courses: ["Psychology", "Sociology", "Education", "Social Work", "Human Resources"],
+        description: "Your empathy and people skills make you ideal for careers that help others!",
+        color: "teal"
       };
     } else {
+      // Default balanced recommendation
       return {
-        title: "Social Sciences",
-        careers: ["Psychology", "Social Work", "Education", "Public Administration"],
-        description: "Your empathy and desire to help others make you ideal for social impact careers!"
+        title: "Balanced Profile",
+        careers: ["Project Manager", "Business Analyst", "Consultant", "Teacher", "Public Relations"],
+        courses: ["Liberal Arts", "Business Administration", "Communications", "Management Studies"],
+        description: "Your diverse interests give you flexibility to succeed in multiple fields!",
+        color: "indigo"
       };
     }
   };
@@ -147,15 +234,32 @@ const Quiz = () => {
                 <p className="text-muted-foreground text-lg mb-6">{results.description}</p>
               </div>
               
-              <div className="grid md:grid-cols-2 gap-4">
-                {results.careers.map((career, index) => (
-                  <div key={career} className="bg-muted p-4 rounded-xl animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-                    <h4 className="font-semibold text-foreground mb-2">{career}</h4>
-                    <Button variant="outline" size="sm" className="w-full">
-                      Learn More
-                    </Button>
+              <div className="grid md:grid-cols-2 gap-6 mb-8">
+                <div className="bg-green-50 p-6 rounded-xl">
+                  <h4 className="font-bold text-green-800 mb-4 flex items-center gap-2">
+                    🎓 Recommended Courses
+                  </h4>
+                  <div className="space-y-2">
+                    {results.courses.map((course, index) => (
+                      <div key={course} className="bg-white p-3 rounded-lg shadow-sm animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                        <span className="text-green-700 font-medium">{course}</span>
+                      </div>
+                    ))}
                   </div>
-                ))}
+                </div>
+                
+                <div className="bg-purple-50 p-6 rounded-xl">
+                  <h4 className="font-bold text-purple-800 mb-4 flex items-center gap-2">
+                    💼 Career Opportunities
+                  </h4>
+                  <div className="space-y-2">
+                    {results.careers.map((career, index) => (
+                      <div key={career} className="bg-white p-3 rounded-lg shadow-sm animate-fade-in" style={{ animationDelay: `${index * 0.1 + 0.2}s` }}>
+                        <span className="text-purple-700 font-medium">{career}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
