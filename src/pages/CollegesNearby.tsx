@@ -6,12 +6,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Search, Phone, Globe, Star, Users } from "lucide-react";
 import Navigation from "@/components/Navigation";
+import { useLanguage } from "@/contexts/LanguageContext";
 import kashmirCampusImage from "@/assets/kashmir-campus.jpg";
 
 const CollegesNearby = () => {
   const [selectedDistrict, setSelectedDistrict] = useState<string>("");
   const [selectedType, setSelectedType] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState("");
+  const { t } = useLanguage();
 
   const jkDistricts = [
     "Srinagar", "Baramulla", "Kupwara", "Bandipora", "Ganderbal", "Budgam", 
@@ -113,11 +115,10 @@ const CollegesNearby = () => {
         {/* Header */}
         <div className="text-center mb-12 animate-fade-in">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Find <span className="bg-gradient-hero bg-clip-text text-transparent">Colleges Nearby</span>
+            {t('colleges.title').split(' ')[0]} <span className="bg-gradient-hero bg-clip-text text-transparent">{t('colleges.title').split(' ').slice(1).join(' ')}</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Discover top educational institutions in Jammu & Kashmir. Find the perfect college 
-            for your career goals with detailed information and direct contact.
+            {t('colleges.subtitle')}
           </p>
         </div>
 

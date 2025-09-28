@@ -2,18 +2,21 @@ import { Button } from "@/components/ui/button";
 import { GraduationCap, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   const navItems = [
-    { name: "Home", path: "/" },
-    { name: "Aptitude Quiz", path: "/quiz" },
-    { name: "Courses & Careers", path: "/courses" },
-    { name: "Colleges Nearby", path: "/colleges" },
-    { name: "Timeline", path: "/timeline" },
-    { name: "Resources", path: "/resources" },
+    { name: t('nav.home'), path: "/" },
+    { name: t('nav.quiz'), path: "/quiz" },
+    { name: t('nav.courses'), path: "/courses" },
+    { name: t('nav.colleges'), path: "/colleges" },
+    { name: t('nav.timeline'), path: "/timeline" },
+    { name: t('nav.resources'), path: "/resources" },
   ];
 
   return (
@@ -41,20 +44,21 @@ const Navigation = () => {
             ))}
           </div>
 
-          {/* Auth Buttons */}
+          {/* Auth Buttons & Language Switcher */}
           <div className="hidden md:flex items-center space-x-3">
+            <LanguageSwitcher />
             <Button 
               variant="ghost" 
               onClick={() => navigate("/login")}
               className="text-foreground hover:text-primary"
             >
-              Login
+              {t('nav.login')}
             </Button>
             <Button 
               onClick={() => navigate("/register")}
               className="bg-gradient-hero text-primary-foreground hover:shadow-glow transition-all duration-300"
             >
-              Sign Up
+              {t('nav.register')}
             </Button>
           </div>
 
@@ -86,27 +90,28 @@ const Navigation = () => {
                   {item.name}
                 </button>
               ))}
-              <div className="flex flex-col space-y-2 pt-4">
-                <Button 
-                  variant="ghost" 
-                  onClick={() => {
-                    navigate("/login");
-                    setIsMenuOpen(false);
-                  }}
-                  className="w-full"
-                >
-                  Login
-                </Button>
-                <Button 
-                  onClick={() => {
-                    navigate("/register");
-                    setIsMenuOpen(false);
-                  }}
-                  className="w-full bg-gradient-hero text-primary-foreground"
-                >
-                  Sign Up
-                </Button>
-              </div>
+               <div className="flex flex-col space-y-2 pt-4">
+                 <LanguageSwitcher />
+                 <Button 
+                   variant="ghost" 
+                   onClick={() => {
+                     navigate("/login");
+                     setIsMenuOpen(false);
+                   }}
+                   className="w-full"
+                 >
+                   {t('nav.login')}
+                 </Button>
+                 <Button 
+                   onClick={() => {
+                     navigate("/register");
+                     setIsMenuOpen(false);
+                   }}
+                   className="w-full bg-gradient-hero text-primary-foreground"
+                 >
+                   {t('nav.register')}
+                 </Button>
+               </div>
             </div>
           </div>
         )}
