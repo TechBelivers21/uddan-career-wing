@@ -98,7 +98,7 @@ const CollegesNearby = () => {
   ];
 
   const filteredColleges = colleges.filter(college => {
-    const matchesDistrict = !selectedDistrict || college.district === selectedDistrict;
+    const matchesDistrict = !selectedDistrict || selectedDistrict === "all" || college.district === selectedDistrict;
     const matchesType = !selectedType || selectedType === "All" || college.type === selectedType;
     const matchesSearch = !searchQuery || college.name.toLowerCase().includes(searchQuery.toLowerCase());
     
@@ -141,7 +141,7 @@ const CollegesNearby = () => {
                     <SelectValue placeholder="Select District" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">All Districts</SelectItem>
+                    <SelectItem value="all">All Districts</SelectItem>
                     {jkDistricts.map(district => (
                       <SelectItem key={district} value={district}>{district}</SelectItem>
                     ))}
